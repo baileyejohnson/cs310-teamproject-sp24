@@ -1,7 +1,7 @@
 package edu.jsu.mcis.cs310.tas_sp24;
 
 public enum PunchAdjustmentType {
-    //Test
+    //Testg
 
     NONE("None"),
     SHIFT_START("Shift Start"),
