@@ -1,5 +1,6 @@
 package edu.jsu.mcis.cs310.tas_sp24;
 
+import edu.jsu.mcis.cs310.tas_sp24.dao.DepartmentDAO;
 import edu.jsu.mcis.cs310.tas_sp24.dao.*;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -18,10 +19,12 @@ public class DepartmentFindTest {
     @Test
     public void testFindDepartment1() {
 
+        //Creates and puts the DepartmentDAO in the .dao Source files
         DepartmentDAO departmentDAO = daoFactory.getDepartmentDAO();
 
         /* Retrieve Department from Database */
         
+        //Creates and Put Department class in Source packages
         Department d1 = departmentDAO.find(1);
 
         /* Compare to Expected Values */
