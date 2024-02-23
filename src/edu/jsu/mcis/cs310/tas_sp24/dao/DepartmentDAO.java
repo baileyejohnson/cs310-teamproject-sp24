@@ -84,7 +84,7 @@ public class DepartmentDAO {
 
         }
         
-         return dp;
+         return department;
          
      
      //Pull termid

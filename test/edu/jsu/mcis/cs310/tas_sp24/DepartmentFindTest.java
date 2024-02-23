@@ -25,7 +25,7 @@ public class DepartmentFindTest {
         /* Retrieve Department from Database */
         
         //Creates and Put Department class in Source packages
-        ////Made Department into a String
+        //Made Department into a String
         Department dl = departmentDAO.find(1);
 
         /* Compare to Expected Values */

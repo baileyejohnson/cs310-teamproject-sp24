@@ -10,6 +10,20 @@ package edu.jsu.mcis.cs310.tas_sp24;
  */
 public class Department {
     private final String id, description;
+    private final int termid;
+
+    public Department(String id, String description, int termid) {
+        this.id = id;
+        this.description = description;
+        this.termid = termid;
+    }
+    public String getId(){
+        return id;
+    }
+    public String getDescription(){
+        return description;
+    }
+    public int getTermid(){
     private final String termid;
 
     public Department(String id, String description, String termid) {
