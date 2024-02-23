@@ -4,6 +4,12 @@
  */
 package edu.jsu.mcis.cs310.tas_sp24.dao;
 
+import edu.jsu.mcis.cs310.tas_sp24.Department;
+
+import java.sql.*;
+
+import java.sql.SQLException;
+
 /**
  *
  * @author egmck
@@ -11,72 +17,76 @@ package edu.jsu.mcis.cs310.tas_sp24.dao;
 public class DepartmentDAO {
     
     private final DAOFactory daoFactory;
+    
+    private static final String QUERY_FIND = "SELECT * FROM badge WHERE id = ?";
 
     DepartmentDAO(DAOFactory daoFactory) {
 
         this.daoFactory = daoFactory;
 
     }
-    dpfind(terminalID)
+    //dpfind(termid)
     
-     public String find(int terminalD){
-        
-         
-     }
-}
-             /*
-      public String find(int termid, String subjectid, String num) {
-        
-        String result = "[]";
-        
+     public String find(String termid){
+         Department dp = null;
+
         PreparedStatement ps = null;
         ResultSet rs = null;
-        ResultSetMetaData rsmd = null;
-        
+
         try {
-            
+
             Connection conn = daoFactory.getConnection();
-            
+
             if (conn.isValid(0)) {
-                
-                //TermID should be an int
-                //SubjectID and Course Number should be strings
-                String QUERY_FIND = "SELECT * FROM section WHERE subjectid = ? AND num = ? AND termid = ? ORDER BY crn";
+
                 ps = conn.prepareStatement(QUERY_FIND);
-                ps.setString(1, subjectid);
-                ps.setString(2, num);
-                ps.setInt(3, termid);
-                rs = ps.executeQuery();
-                
-                while(rs.next())
-                {
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.put("crn", rs.getInt("crn"));
-                    jsonObject.put("subjectid", rs.getString("subjectid"));
-                    jsonObject.put("num", rs.getString("num"));
-                    jsonObject.put("termid", rs.getInt("termid"));
-                    jsonArray.add(jsonObject);
+                ps.setString(1, termid);
+
+                boolean hasresults = ps.execute();
+
+                if (hasresults) {
+
+                    rs = ps.getResultSet();
+
+                    while (rs.next()) {
+
+                        //String description = rs.getString("description");
+                        dp = new Department(termid);
+
+                    }
+
                 }
-                
-                
+
             }
-            
+
+        }
+         
+         catch (SQLException e) {
+
+            throw new DAOException(e.getMessage());
+
+        } finally {
+
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    throw new DAOException(e.getMessage());
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    throw new DAOException(e.getMessage());
+                }
+            }
+
         }
         
-        catch (Exception e) { e.printStackTrace(); }
-        
-        finally {
-            
-            if (rs != null) { try { rs.close(); } catch (Exception e) { e.printStackTrace(); } }
-            if (ps != null) { try { ps.close(); } catch (Exception e) { e.printStackTrace(); } }
-            
-        }
-        
-        //return result;
-        return jsonArray.toString();
-        
-    }
-    
-}
-    
-}
+         return dp;
+         
+     
+     //Pull termid
+     //Update it as well into Department class
+}}

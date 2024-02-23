@@ -25,11 +25,12 @@ public class DepartmentFindTest {
         /* Retrieve Department from Database */
         
         //Creates and Put Department class in Source packages
-        Department d1 = departmentDAO.find(1);
+        ////Made Department into a String
+        Department dl = departmentDAO.find(1);
 
         /* Compare to Expected Values */
         
-        assertEquals("#1 (Assembly), Terminal ID: 103", d1.toString());
+        assertEquals("#1 (Assembly), Terminal ID: 103", dl.toString());
 
     }
 
@@ -40,6 +41,7 @@ public class DepartmentFindTest {
 
         /* Retrieve Department from Database */
         
+        //Made Department into a String
         Department d2 = departmentDAO.find(6);
 
         /* Compare to Expected Values */
@@ -55,6 +57,7 @@ public class DepartmentFindTest {
 
         /* Retrieve Department from Database */
         
+        //Made Department into a String
         Department d3 = departmentDAO.find(8);
 
         /* Compare to Expected Values */

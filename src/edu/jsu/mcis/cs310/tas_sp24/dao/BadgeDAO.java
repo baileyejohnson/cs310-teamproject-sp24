@@ -30,7 +30,7 @@ public class BadgeDAO {
 
                 ps = conn.prepareStatement(QUERY_FIND);
                 ps.setString(1, id);
-
+               
                 boolean hasresults = ps.execute();
 
                 if (hasresults) {
