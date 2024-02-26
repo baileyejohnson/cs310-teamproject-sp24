@@ -25,7 +25,7 @@ public class ShiftDAO {
     }
     
 
-    public Shift findById(Integer id) {
+    public Shift find(int id) {
 
         Shift shift = null;
         PreparedStatement ps = null;
@@ -94,7 +94,7 @@ public class ShiftDAO {
 
     }
 
-    public Shift findByBadge(Badge badge) {
+    public Shift find(Badge badge) {
 
         Shift shift = null;
         PreparedStatement ps = null;
@@ -118,7 +118,7 @@ public class ShiftDAO {
                     if (rs.next()) {
                         
                         int shiftId = rs.getInt("shiftid");
-                        shift = findById(shiftId);
+                        shift = find(shiftId);
                 
 
                     }
@@ -153,12 +153,5 @@ public class ShiftDAO {
         return shift;
 
     }
-
-    public Shift find(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Shift find(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }
