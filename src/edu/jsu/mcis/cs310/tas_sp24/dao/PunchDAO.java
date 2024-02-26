@@ -4,7 +4,7 @@
  */
 package edu.jsu.mcis.cs310.tas_sp24.dao;
 
-import edu.jsu.mcis.cs310.tas_sp24.Badge;
+import edu.jsu.mcis.cs310.tas_sp24.Punch;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

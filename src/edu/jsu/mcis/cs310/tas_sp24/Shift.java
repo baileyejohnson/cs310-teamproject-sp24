@@ -26,20 +26,20 @@ public class Shift {
     private Integer shiftDuration;
 
     // Constructor accepting a Map<String, String> for shift-related information
-    public Shift(Map<String, String> shiftInfo) {
+    public Shift(Integer id1, Map<String, Object> shiftInfo) {
         // Retrieve values from the map and convert them to their native types
-        this.id = Integer.parseInt(shiftInfo.get("id"));
-        this.description = shiftInfo.get("description");
-        this.shiftStart = LocalTime.parse(shiftInfo.get("shiftstart"));
-        this.shiftStop = LocalTime.parse(shiftInfo.get("shiftstop"));
-        this.roundInterval = Integer.parseInt(shiftInfo.get("roundinterval"));
-        this.gracePeriod = Integer.parseInt(shiftInfo.get("graceperiod"));
-        this.dockPenalty = Integer.parseInt(shiftInfo.get("dockpenalty"));
-        this.lunchStart = LocalTime.parse(shiftInfo.get("lunchstart"));
-        this.lunchStop = LocalTime.parse(shiftInfo.get("lunchstop"));
-        this.lunchThreshold = Integer.parseInt(shiftInfo.get("lunchthreshold"));
-        this.lunchDuration = Integer.parseInt(shiftInfo.get("lunchduration"));
-        this.shiftDuration = Integer.parseInt(shiftInfo.get("shiftduration"));
+        this.id = Integer.parseInt((String) shiftInfo.get("id"));
+        this.description = (String) shiftInfo.get("description");
+        this.shiftStart = LocalTime.parse((CharSequence) shiftInfo.get("shiftstart"));
+        this.shiftStop = LocalTime.parse((CharSequence) shiftInfo.get("shiftstop"));
+        this.roundInterval = Integer.parseInt((String) shiftInfo.get("roundinterval"));
+        this.gracePeriod = Integer.parseInt((String) shiftInfo.get("graceperiod"));
+        this.dockPenalty = Integer.parseInt((String) shiftInfo.get("dockpenalty"));
+        this.lunchStart = LocalTime.parse((CharSequence) shiftInfo.get("lunchstart"));
+        this.lunchStop = LocalTime.parse((CharSequence) shiftInfo.get("lunchstop"));
+        this.lunchThreshold = Integer.parseInt((String) shiftInfo.get("lunchthreshold"));
+        this.lunchDuration = Integer.parseInt((String) shiftInfo.get("lunchduration"));
+        this.shiftDuration = Integer.parseInt((String) shiftInfo.get("shiftduration"));
     }
 
     // Getters for instance fields
