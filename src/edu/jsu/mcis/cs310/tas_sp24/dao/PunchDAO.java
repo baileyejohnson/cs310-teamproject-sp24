@@ -4,6 +4,8 @@
  */
 package edu.jsu.mcis.cs310.tas_sp24.dao;
 
+import edu.jsu.mcis.cs310.tas_sp24.Badge;
+import edu.jsu.mcis.cs310.tas_sp24.EventType;
 import edu.jsu.mcis.cs310.tas_sp24.Punch;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,9 +13,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class PunchDAO {
-        private static final String QUERY_FIND = "SELECT * FROM event WHERE id = ?";
+    private static final String QUERY_FIND = "SELECT * FROM event WHERE id = ?";
 
     private final DAOFactory daoFactory;
 
@@ -26,7 +29,6 @@ public class PunchDAO {
     public Punch find(Integer id) {
 
         Punch punch = null;
-
         PreparedStatement ps = null;
         ResultSet rs = null;
 
@@ -46,17 +48,29 @@ public class PunchDAO {
                     rs = ps.getResultSet();
 
                     while (rs.next()) {
+                         
+                         LocalDateTime timestamp = rs.getTimestamp("timestamp").toLocalDateTime();
+                         int terminalId = rs.getInt("terminalid");
 
-                        Integer terminalId = rs.getInt("terminalid");
-                        String badgeId = rs.getString("badgeid");
-                        Timestamp timestamp = rs.getTimestamp("timestamp");
-                        Integer eventTypeId = rs.getInt("eventtypeid");
-                                               
+                       // Getting badge
+                        String badgeid = rs.getString("badgeid");
+                        Badge badge = daoFactory.getBadgeDAO().find(badgeid);
+
+                        // Getting punch type 
+                        EventType punchtype = EventType.values()[rs.getInt("eventtypeid")];
+
+                        // Getting timestamp
+                        LocalDateTime originaltimestamp = rs.getTimestamp("timestamp").toLocalDateTime();
+
+                        // Creating Punch object
+                        punch = new Punch(id, terminalId, badge, originaltimestamp, punchtype);
+
+                        }
                     }
 
                 }
 
-            }
+            
 
         } catch (SQLException e) {
 
