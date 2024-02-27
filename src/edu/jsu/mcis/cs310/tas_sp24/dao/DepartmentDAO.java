@@ -50,8 +50,8 @@ public class DepartmentDAO {
 
                     while (rs.next()) {
                         String description = rs.getString("description");
-                        int termid = rs.getInt("termid");
-                        dp = new Department(id, description, termid);
+                        int terminalid = rs.getInt("terminalid");
+                        dp = new Department(id, description, terminalid);
 
                     }
 

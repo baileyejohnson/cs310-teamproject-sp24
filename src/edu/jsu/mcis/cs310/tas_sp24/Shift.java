@@ -26,17 +26,17 @@ public class Shift {
     private Integer shiftDuration;
 
     // Constructor accepting a Map<String, String> for shift-related information
-    public Shift(Integer id1, Map<String, Object> shiftInfo) {
+    public Shift(Map<String, Object> shiftInfo) {
         // Retrieve values from the map and convert them to their native types
         this.id = Integer.parseInt((String) shiftInfo.get("id"));
         this.description = (String) shiftInfo.get("description");
-        this.shiftStart = LocalTime.parse((CharSequence) shiftInfo.get("shiftstart"));
-        this.shiftStop = LocalTime.parse((CharSequence) shiftInfo.get("shiftstop"));
+        this.shiftStart = LocalTime.parse((String) shiftInfo.get("shiftstart"));
+        this.shiftStop = LocalTime.parse((String) shiftInfo.get("shiftstop"));
         this.roundInterval = Integer.parseInt((String) shiftInfo.get("roundinterval"));
         this.gracePeriod = Integer.parseInt((String) shiftInfo.get("graceperiod"));
         this.dockPenalty = Integer.parseInt((String) shiftInfo.get("dockpenalty"));
-        this.lunchStart = LocalTime.parse((CharSequence) shiftInfo.get("lunchstart"));
-        this.lunchStop = LocalTime.parse((CharSequence) shiftInfo.get("lunchstop"));
+        this.lunchStart = LocalTime.parse((String) shiftInfo.get("lunchstart"));
+        this.lunchStop = LocalTime.parse((String) shiftInfo.get("lunchstop"));
         this.lunchThreshold = Integer.parseInt((String) shiftInfo.get("lunchthreshold"));
         this.lunchDuration = Integer.parseInt((String) shiftInfo.get("lunchduration"));
         this.shiftDuration = Integer.parseInt((String) shiftInfo.get("shiftduration"));

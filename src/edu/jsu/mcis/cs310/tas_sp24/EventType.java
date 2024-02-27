@@ -1,4 +1,4 @@
-package edu.jsu.mcis.cs310.tas_sp24;
+  package edu.jsu.mcis.cs310.tas_sp24;
 
 public enum EventType {
 
