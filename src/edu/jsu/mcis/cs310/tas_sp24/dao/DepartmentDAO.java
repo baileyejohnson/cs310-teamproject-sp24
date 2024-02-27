@@ -18,7 +18,7 @@ public class DepartmentDAO {
     
     private final DAOFactory daoFactory;
     
-    private static final String QUERY_FIND = "SELECT * FROM badge WHERE id = ?";
+    private static final String QUERY_FIND = "SELECT * FROM department WHERE id = ?";
 
     DepartmentDAO(DAOFactory daoFactory) {
 
@@ -27,7 +27,7 @@ public class DepartmentDAO {
     }
     //dpfind(termid)
     
-     public String find(String termid){
+     public Department find(int id){
          Department dp = null;
 
         PreparedStatement ps = null;
@@ -40,7 +40,7 @@ public class DepartmentDAO {
             if (conn.isValid(0)) {
 
                 ps = conn.prepareStatement(QUERY_FIND);
-                ps.setString(1, termid);
+                ps.setInt(1, id);
 
                 boolean hasresults = ps.execute();
 
@@ -49,9 +49,9 @@ public class DepartmentDAO {
                     rs = ps.getResultSet();
 
                     while (rs.next()) {
-
-                        //String description = rs.getString("description");
-                        dp = new Department(termid);
+                        String description = rs.getString("description");
+                        int termid = rs.getInt("termid");
+                        dp = new Department(id, description, termid);
 
                     }
 
@@ -84,7 +84,7 @@ public class DepartmentDAO {
 
         }
         
-         return department;
+         return dp;
          
      
      //Pull termid

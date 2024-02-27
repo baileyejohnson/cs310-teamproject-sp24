@@ -9,35 +9,25 @@ package edu.jsu.mcis.cs310.tas_sp24;
  * @author egmck
  */
 public class Department {
-    private final String id, description;
-    private final int termid;
+    private  int id, termid;
+    private  String description;
 
-    public Department(String id, String description, int termid) {
+    public Department(int id, String description, int termid) {
         this.id = id;
         this.description = description;
         this.termid = termid;
     }
-    public String getId(){
+    
+    public Department(int termid){
+        this.termid = termid;
+    }
+    public int getId(){
         return id;
     }
     public String getDescription(){
         return description;
     }
     public int getTermid(){
-    private final String termid;
-
-    public Department(String id, String description, String termid) {
-        this.id = id;
-        this.description = description;
-        this.termid = termid;
-    }
-    public String getId(){
-        return id;
-    }
-    public String getDescription(){
-        return description;
-    }
-    public String getTermid(){
         return termid;
     }
     
@@ -46,7 +36,7 @@ public class Department {
         StringBuilder dpString = new StringBuilder();
         dpString.append('#').append(id).append(' ');
         dpString.append('(').append(description).append(')');
-        dpString.append('#').append(termid).append(')');
+        dpString.append(',').append(termid).append(')');
         return dpString.toString();
     }
 }

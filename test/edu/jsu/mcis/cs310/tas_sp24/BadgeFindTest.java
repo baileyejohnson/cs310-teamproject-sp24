@@ -42,7 +42,6 @@ public class BadgeFindTest {
         /* Compare to Expected Values */
         
         assertEquals("#08D01475 (Littell, Amie D)", b2.toString());
-
     }
     
     @Test
