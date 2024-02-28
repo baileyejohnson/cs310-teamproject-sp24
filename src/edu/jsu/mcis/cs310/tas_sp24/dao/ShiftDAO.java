@@ -48,16 +48,17 @@ public class ShiftDAO {
 
                     while (rs.next()) {
 
-                        Map<String, Object> shiftInfo = new HashMap<>();
+                        HashMap<String, String> shiftInfo = new HashMap<>();
+                        shiftInfo.put("id", rs.getString("id"));
                         shiftInfo.put("description", rs.getString("description"));
-                        shiftInfo.put("shiftstart", rs.getString("shiftstart"));
-                        shiftInfo.put("shiftstop", rs.getString("shiftstop"));
-                        shiftInfo.put("roundinterval", rs.getString("roundinterval"));
-                        shiftInfo.put("graceperiod", rs.getString("graceperiod"));
-                        shiftInfo.put("dockpenalty", rs.getString("dockpenalty"));
-                        shiftInfo.put("lunchstart", rs.getString("lunchstart"));
-                        shiftInfo.put("lunchstop", rs.getString("lunchstop"));
-                        shiftInfo.put("lunchthreshold", rs.getString("lunchthreshold"));
+                        shiftInfo.put("shiftStart", rs.getString("shiftstart"));
+                        shiftInfo.put("shiftStop", rs.getString("shiftstop"));
+                        shiftInfo.put("roundInterval", rs.getString("roundinterval"));
+                        shiftInfo.put("gracePeriod", rs.getString("graceperiod"));
+                        shiftInfo.put("dockPenalty", rs.getString("dockpenalty"));
+                        shiftInfo.put("lunchStart", rs.getString("lunchstart"));
+                        shiftInfo.put("lunchStop", rs.getString("lunchstop"));
+                        shiftInfo.put("lunchThreshold", rs.getString("lunchthreshold"));
                         shift = new Shift (shiftInfo);
                         
 
