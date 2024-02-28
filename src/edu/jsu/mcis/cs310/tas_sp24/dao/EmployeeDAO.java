@@ -60,8 +60,8 @@ public class EmployeeDAO {
                         String lastname = rs.getString("lastname");
                         String middlename = rs.getString("middlename");
                         
-                        DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                        LocalDate active = LocalDate.parse(rs.getString("active"), formatTime);
+                        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                        LocalDate active = LocalDate.parse(rs.getString("active"), format);
                         EmployeeType employeeType = EmployeeType.values()[rs.getInt("employeeTypeID")];
 
                         Badge badge = badgedao.find(rs.getString("badgeid"));
@@ -140,8 +140,8 @@ public class EmployeeDAO {
                         String lastname = rs.getString("lastname");
                         String middlename = rs.getString("middlename");
                         
-                        DateTimeFormatter formattime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                        LocalDate active = LocalDate.parse(rs.getString("active"), formattime);
+                        DateTimeFormatter formatt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        LocalDate active = LocalDate.parse(rs.getString("active"), format);
                         EmployeeType employeeType = EmployeeType.values()[rs.getInt("employeeTypeID")];
 
                         
