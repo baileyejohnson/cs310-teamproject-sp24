@@ -34,6 +34,15 @@ public Employee(Integer id, String firstname, String middlename, String lastname
         this.employeeType=employeeType;
     }
 
+ public Employee (int id)
+ {
+     this.id = id;
+ }
+ 
+ public Employee(Badge id)
+ {
+     this.badge = badge;
+ }
     public Integer getId() {
         return id;
     }
