@@ -82,8 +82,7 @@ public class EmployeeDAO {
          return emp;
 }
      
-    public Employee find(Badge id){
-        //otherBadge.getid
+    public Employee find(Badge badge){
         Employee emp = null;
 
         PreparedStatement ps = null;
@@ -96,7 +95,7 @@ public class EmployeeDAO {
             if (conn.isValid(0)) {
 
                 ps = conn.prepareStatement(QUERY_FIND);
-                ps.setString(1, id);
+                ps.setString(1, badge.getId());
                   
 
                 boolean hasresults = ps.execute();
@@ -107,7 +106,7 @@ public class EmployeeDAO {
 
                     while (rs.next()) {
                         String description = rs.getString("description");
-                        badge = new Employee(id);
+                        
 
                     }
 
