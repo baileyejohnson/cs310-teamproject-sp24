@@ -5,11 +5,17 @@
 package edu.jsu.mcis.cs310.tas_sp24.dao;
 
 import edu.jsu.mcis.cs310.tas_sp24.Badge;
+import edu.jsu.mcis.cs310.tas_sp24.Department;
 import edu.jsu.mcis.cs310.tas_sp24.Employee;
+import edu.jsu.mcis.cs310.tas_sp24.EmployeeType;
+import edu.jsu.mcis.cs310.tas_sp24.Shift;
 
 import java.sql.*;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 /**
  *
  * @author TIMI
@@ -17,14 +23,15 @@ import java.sql.SQLException;
 public class EmployeeDAO {
     private final DAOFactory daoFactory;
     
-    private static final String QUERY_FIND = "SELECT * FROM department WHERE id = ?";
+    private static final String QUERY_FIND = "SELECT * FROM employee WHERE id = ?";
+    private static final String QUERY_BADGE_FIND = "SELECT * FROM employee WHERE badgeid = ?";
 
     EmployeeDAO(DAOFactory daoFactory) {
 
         this.daoFactory = daoFactory;
 }
     public Employee find(int id){
-         Employee emp = null;
+        Employee emp = null;
 
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -45,8 +52,25 @@ public class EmployeeDAO {
                     rs = ps.getResultSet();
 
                     while (rs.next()) {
-                        String description = rs.getString("description");
-                        emp = new Employee(id);
+                        BadgeDAO badgedao = new BadgeDAO(daoFactory);
+                        ShiftDAO shiftdao = new ShiftDAO(daoFactory);
+                        DepartmentDAO departmentdao = new DepartmentDAO(daoFactory);
+                        
+                        String firstname = rs.getString("firstname");
+                        String lastname = rs.getString("lastname");
+                        String middlename = rs.getString("middlename");
+                        
+                        DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                        LocalDate active = LocalDate.parse(rs.getString("active"), formatTime);
+                        EmployeeType employeeType = EmployeeType.values()[rs.getInt("employeeTypeID")];
+
+                        Badge badge = badgedao.find(rs.getString("badgeid"));
+                        Department department = departmentdao.find(rs.getInt("departmentid"));
+                        Shift shift = shiftdao.find(badge);
+                        
+                         emp = new Employee(id,firstname,middlename,lastname,active,badge,department,shift,employeeType);
+
+                    }
 
                     }
 
@@ -54,7 +78,7 @@ public class EmployeeDAO {
 
             }
 
-        }
+        
          
          catch (SQLException e) {
 
@@ -82,10 +106,9 @@ public class EmployeeDAO {
          return emp;
 }
      
-    public Employee find(Badge id){
-        //otherBadge.getid
+    public Employee find(Badge badge){
+        
         Employee emp = null;
-
         PreparedStatement ps = null;
         ResultSet rs = null;
 
@@ -95,8 +118,8 @@ public class EmployeeDAO {
 
             if (conn.isValid(0)) {
 
-                ps = conn.prepareStatement(QUERY_FIND);
-                ps.setString(1, id);
+                ps = conn.prepareStatement(QUERY_BADGE_FIND);
+                ps.setString(1, badge.getId());
                   
 
                 boolean hasresults = ps.execute();
@@ -106,16 +129,36 @@ public class EmployeeDAO {
                     rs = ps.getResultSet();
 
                     while (rs.next()) {
-                        String description = rs.getString("description");
-                        badge = new Employee(id);
+                        
+                        ShiftDAO shiftdao = new ShiftDAO(daoFactory);
+                        DepartmentDAO departmentdao = new DepartmentDAO(daoFactory);
 
+                        
+                       
+                        int id = rs.getInt("id");
+                        String firstname = rs.getString("firstname");
+                        String lastname = rs.getString("lastname");
+                        String middlename = rs.getString("middlename");
+                        
+                        DateTimeFormatter formattime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                        LocalDate active = LocalDate.parse(rs.getString("active"), formattime);
+                        EmployeeType employeeType = EmployeeType.values()[rs.getInt("employeeTypeID")];
+
+                        
+                        Department department = departmentdao.find(rs.getInt("departmentid"));
+                        Shift shift = shiftdao.find(rs.getInt("shiftid"));
+
+                        emp = new Employee(id,firstname,middlename,lastname,active,badge,department,shift,employeeType);
+
+                    }
+                        
                     }
 
                 }
 
             }
 
-        }
+        
          
          catch (SQLException e) {
 

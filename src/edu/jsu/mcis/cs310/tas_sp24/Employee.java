@@ -4,6 +4,7 @@
  */
 package edu.jsu.mcis.cs310.tas_sp24;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -13,14 +14,14 @@ import java.time.LocalDateTime;
 public class Employee {
     private Integer id;
     private String firstname, middlename, lastname;
-    private LocalDateTime active;
+    private LocalDate active;
     private Badge badge;
     private Department department;
     private Shift shift;
     private EmployeeType employeeType;
 
 
-public Employee(Integer id, String firstname, String middlename, String lastname, LocalDateTime active, Badge badge, 
+public Employee(Integer id, String firstname, String middlename, String lastname, LocalDate active, Badge badge, 
             Department department, Shift shift, EmployeeType employeeType) 
     {
         this.id = id;
@@ -34,15 +35,6 @@ public Employee(Integer id, String firstname, String middlename, String lastname
         this.employeeType=employeeType;
     }
 
- public Employee (int id)
- {
-     this.id = id;
- }
- 
- public Employee(Badge id)
- {
-     this.badge = badge;
- }
     public Integer getId() {
         return id;
     }
@@ -59,7 +51,7 @@ public Employee(Integer id, String firstname, String middlename, String lastname
         return lastname;
     }
     
-    public LocalDateTime getActive() {
+    public LocalDate getActive() {
         return active;
     }
     
@@ -86,7 +78,7 @@ public Employee(Integer id, String firstname, String middlename, String lastname
        StringBuilder empstring = new StringBuilder();
          empstring.append("ID #").append(id).append(": ").append(lastname).append(", ").append(firstname)
                   .append(" ").append(middlename).append(" (#").append(badge.getId()).append("), Type: ") 
-                  .append(employeeType).append(", Department: ").append(department.getDescription()).append(", Active: ");
+                  .append(employeeType).append(", Department: ").append(department.getDescription()).append(", Active: ").append(active);
             
          
         return empstring.toString();
