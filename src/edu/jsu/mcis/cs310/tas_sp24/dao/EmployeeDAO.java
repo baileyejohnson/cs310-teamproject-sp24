@@ -13,7 +13,6 @@ import edu.jsu.mcis.cs310.tas_sp24.Shift;
 import java.sql.*;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 /**
@@ -60,8 +59,7 @@ public class EmployeeDAO {
                         String lastname = rs.getString("lastname");
                         String middlename = rs.getString("middlename");
                         
-                        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                        LocalDate active = LocalDate.parse(rs.getString("active"), format);
+                        LocalDateTime active = rs.getTimestamp("active").toLocalDateTime();
                         EmployeeType employeeType = EmployeeType.values()[rs.getInt("employeeTypeID")];
 
                         Badge badge = badgedao.find(rs.getString("badgeid"));
@@ -140,11 +138,11 @@ public class EmployeeDAO {
                         String lastname = rs.getString("lastname");
                         String middlename = rs.getString("middlename");
                         
-                        DateTimeFormatter formatt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                        LocalDate active = LocalDate.parse(rs.getString("active"), format);
+                        
+                        LocalDateTime active = rs.getTimestamp("active").toLocalDateTime();
+
                         EmployeeType employeeType = EmployeeType.values()[rs.getInt("employeeTypeID")];
 
-                        
                         Department department = departmentdao.find(rs.getInt("departmentid"));
                         Shift shift = shiftdao.find(rs.getInt("shiftid"));
 

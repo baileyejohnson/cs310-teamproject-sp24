@@ -6,6 +6,7 @@ package edu.jsu.mcis.cs310.tas_sp24;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -14,14 +15,14 @@ import java.time.LocalDateTime;
 public class Employee {
     private Integer id;
     private String firstname, middlename, lastname;
-    private LocalDate active;
+    private LocalDateTime active;
     private Badge badge;
     private Department department;
     private Shift shift;
     private EmployeeType employeeType;
 
 
-public Employee(Integer id, String firstname, String middlename, String lastname, LocalDate active, Badge badge, 
+public Employee(Integer id, String firstname, String middlename, String lastname, LocalDateTime active, Badge badge, 
             Department department, Shift shift, EmployeeType employeeType) 
     {
         this.id = id;
@@ -51,7 +52,7 @@ public Employee(Integer id, String firstname, String middlename, String lastname
         return lastname;
     }
     
-    public LocalDate getActive() {
+    public LocalDateTime getActive() {
         return active;
     }
     
@@ -75,10 +76,12 @@ public Employee(Integer id, String firstname, String middlename, String lastname
 
     @Override
     public String toString() {
+        
        StringBuilder empstring = new StringBuilder();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
          empstring.append("ID #").append(id).append(": ").append(lastname).append(", ").append(firstname)
                   .append(" ").append(middlename).append(" (#").append(badge.getId()).append("), Type: ") 
-                  .append(employeeType).append(", Department: ").append(department.getDescription()).append(", Active: ").append(active);
+                  .append(employeeType).append(", Department: ").append(department.getDescription()).append(", Active: ").append(active.format(format));
             
          
         return empstring.toString();

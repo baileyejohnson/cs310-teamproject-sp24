@@ -51,11 +51,11 @@ public class Punch {
         return badge;
     }
 
-    public EventType getPunchType() {
+    public EventType getPunchtype() {
         return punchType;
     }
 
-    public LocalDateTime getOriginalTimestamp() {
+    public LocalDateTime getOriginaltimestamp() {
         return originalTimestamp;
     }
 
