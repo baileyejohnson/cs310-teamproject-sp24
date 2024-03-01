@@ -27,6 +27,7 @@ public class Punch {
         this.terminalid = terminalid;
         this.badge = badge;
         this.punchType = punchType;
+        this.originalTimestamp =LocalDateTime.now();
         this.adjustedTimestamp = null;
     }
 

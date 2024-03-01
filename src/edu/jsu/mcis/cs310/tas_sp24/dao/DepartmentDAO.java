@@ -87,6 +87,5 @@ public class DepartmentDAO {
          return dp;
          
      
-     //Pull termid
-     //Update it as well into Department class
+     
 }}

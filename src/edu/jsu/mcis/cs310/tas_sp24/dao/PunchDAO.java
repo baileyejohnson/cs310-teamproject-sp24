@@ -5,6 +5,7 @@
 package edu.jsu.mcis.cs310.tas_sp24.dao;
 
 import edu.jsu.mcis.cs310.tas_sp24.Badge;
+import edu.jsu.mcis.cs310.tas_sp24.Department;
 import edu.jsu.mcis.cs310.tas_sp24.Employee;
 import edu.jsu.mcis.cs310.tas_sp24.EventType;
 import edu.jsu.mcis.cs310.tas_sp24.Punch;
@@ -15,10 +16,12 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class PunchDAO {
     private static final String QUERY_FIND = "SELECT * FROM event WHERE id = ?";
-    private static final String QUERY_CREATE = "INSERT INTO EVENT(terminalid,badgeid,timestamp,eventtypeid)WHERE(?,?,?,?)";
+    private static final String QUERY_CREATE = "INSERT INTO event(terminalid,badgeid,timestamp,eventtypeid)VALUES(?,?,?,?)";
 
     private final DAOFactory daoFactory;
 
@@ -110,11 +113,17 @@ public class PunchDAO {
         ResultSet rs = null;
         
         EmployeeDAO employeedao = daoFactory.getEmployeeDAO();
+        DepartmentDAO departmentdao = daoFactory.getDepartmentDAO();
         Employee emp = employeedao.find(punch.getBadge());
         
-        Integer Terminalid = emp.getDepartment().getTermid();
+        Integer Empid =emp.getId();
+        Department department = departmentdao.find(Empid);
+        Integer Terminalid = department.getTermid();
         
-        if (Terminalid == punch.getTerminalid()){
+        
+        
+        
+        if (Objects.equals(Terminalid, punch.getTerminalid())){
 
             try {
 
@@ -125,7 +134,7 @@ public class PunchDAO {
                     ps = conn.prepareStatement(QUERY_CREATE,PreparedStatement.RETURN_GENERATED_KEYS);
                     ps.setInt(1, punch.getTerminalid());
                     ps.setString(2, punch.getBadge().getId());
-                    ps.setString(3, punch.getOriginaltimestamp().toString());
+                    ps.setTimestamp(3, Timestamp.valueOf(punch.getOriginaltimestamp().withNano(0)));
                     ps.setInt(4, punch.getPunchtype().ordinal());
 
 
