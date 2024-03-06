@@ -11,6 +11,8 @@ package edu.jsu.mcis.cs310.tas_sp24;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import edu.jsu.mcis.cs310.tas_sp24.Shift;
+import java.time.LocalTime;
 
 public class Punch {
 
@@ -20,6 +22,10 @@ public class Punch {
     private EventType punchType;
     private LocalDateTime originalTimestamp;
     private PunchAdjustmentType adjustedTimestamp; 
+    private Shift s;
+    private Shift start;
+    private Shift end;
+    private LocalTime shiftStart;
 
     // Constructor for new punches
     public Punch(Integer terminalid, Badge badge, EventType punchType) {
@@ -39,6 +45,62 @@ public class Punch {
         this.originalTimestamp = originalTimestamp;
         this.punchType = punchType;
     }
+    
+    public void adjust(Shift s){
+        this.s = s;
+    }
+    
+    public LocalTime printAdjusted(){
+        return shiftStart;
+    }
+    /*
+    WORSHOP PUEUDO CODE
+    LOGIC FOR EARLY AND LATE TIME
+      k-i = j
+    i = 8:00
+    k = 8:03
+    k = date
+    i = time
+    j= minutes late
+    if (late but grace){
+        j-k = your time
+    }
+    else{
+        k- (-j) = early time
+    }
+    gp = grace period
+    if(j <= 5){
+        interval = k-i
+        return interval
+    }
+    else
+    {
+        Dock = i + 15 minutes;
+        return Dock;
+    }
+    
+    LD = lunchDuration
+    LD = 30(min)
+    lStart = true
+    lStop = false
+    if(LD > 30 minutes){
+        lStop = True;
+        return LD;
+    }
+    shiftStop = false;
+    if(shiftStop == true){
+    l = exit time
+        if(l < 5 minutes){
+            grace = l - 5;
+            return grace;
+        }
+        else{
+            l - 15;
+            return l;
+        }
+    }
+    
+    */
 
     public Integer getId() {
         return id;
