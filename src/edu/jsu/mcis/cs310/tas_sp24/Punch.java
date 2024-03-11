@@ -82,12 +82,13 @@ public class Punch {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
         DayOfWeek dayOfTheWeek = originalTimestamp.getDayOfWeek(); 
         
-
         StringBuilder build = new StringBuilder();
         
-        build.append("#").append(badge.getId()).append(" ")
+        build.append("#").append(badge.getId())
+             .append(" ")
              .append(punchType).append(": ")
-             .append(dayOfTheWeek.name().substring(0, 3)).append(" ")
+             .append(dayOfTheWeek.name().substring(0, 3))
+             .append(" ")
              .append(originalTimestamp.format(format));
         
         return build.toString();

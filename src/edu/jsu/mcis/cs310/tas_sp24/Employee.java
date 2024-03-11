@@ -78,10 +78,24 @@ public Employee(Integer id, String firstname, String middlename, String lastname
     public String toString() {
         
        StringBuilder employeestring = new StringBuilder();
+       
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-         employeestring.append("ID #").append(id).append(": ").append(lastname).append(", ").append(firstname)
-                  .append(" ").append(middlename).append(" (#").append(badge.getId()).append("), Type: ") 
-                  .append(employeeType).append(", Department: ").append(department.getDescription()).append(", Active: ").append(active.format(format));
+        
+         employeestring.append("ID #").append(id)
+                       .append(": ")
+                       .append(lastname)
+                       .append(", ")
+                       .append(firstname)
+                       .append(" ")
+                       .append(middlename)
+                       .append(" (#")
+                       .append(badge.getId())
+                       .append("), Type: ") 
+                       .append(employeeType)
+                       .append(", Department: ")
+                       .append(department.getDescription())
+                       .append(", Active: ")
+                       .append(active.format(format));
             
          
         return employeestring.toString();
