@@ -25,7 +25,6 @@ public class DepartmentDAO {
         this.daoFactory = daoFactory;
 
     }
-    //dpfind(termid)
     
     public Department find(int id){
         Department department = null;
@@ -49,6 +48,7 @@ public class DepartmentDAO {
                     rs = ps.getResultSet();
 
                     while (rs.next()) {
+                        
                         String description = rs.getString("description");
                         int terminalid = rs.getInt("terminalid");
                         department = new Department(id, description, terminalid);
@@ -61,9 +61,9 @@ public class DepartmentDAO {
 
         }
          
-         catch (SQLException e) {
+        catch (SQLException e) {
 
-        throw new DAOException(e.getMessage());
+            throw new DAOException(e.getMessage());
 
         } finally {
 
@@ -74,9 +74,11 @@ public class DepartmentDAO {
                     throw new DAOException(e.getMessage());
                 }
             }
+            
             if (ps != null) {
+                
                 try {
-                    ps.close();
+                    ps.close();   
                 } catch (SQLException e) {
                     throw new DAOException(e.getMessage());
                 }
@@ -84,6 +86,8 @@ public class DepartmentDAO {
 
         }
         
-        return department;        
+        return department;   
+        
     }
+    
 }
