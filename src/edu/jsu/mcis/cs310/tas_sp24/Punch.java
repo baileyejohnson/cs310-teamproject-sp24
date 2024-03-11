@@ -84,11 +84,11 @@ public class Punch {
         
 
         StringBuilder build = new StringBuilder();
-        build.append("#").append(badge.getId()).append(" ");
-        build.append(punchType).append(": ");
-        build.append(dayOfTheWeek.name().substring(0, 3)).append(" ");
-       
-        build.append(originalTimestamp.format(format));
+        
+        build.append("#").append(badge.getId()).append(" ")
+             .append(punchType).append(": ")
+             .append(dayOfTheWeek.name().substring(0, 3)).append(" ")
+             .append(originalTimestamp.format(format));
         
         return build.toString();
     }

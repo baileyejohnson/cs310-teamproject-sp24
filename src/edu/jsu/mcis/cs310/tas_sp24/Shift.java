@@ -96,13 +96,14 @@ public class Shift {
     @Override
     public String toString() {
     StringBuilder builder = new StringBuilder();
-     builder.append(description).append(": ")
-        .append(shiftStart).append(" - ")
-        .append(shiftStop).append(" (")
-        .append(shiftDuration.toMinutes()).append(" minutes); Lunch: ")
-        .append(lunchStart).append(" - ")
-        .append(lunchStop).append(" (")
-        .append(lunchDuration.toMinutes()).append(" minutes)");
+    
+    builder.append(description).append(": ")
+           .append(shiftStart).append(" - ")
+           .append(shiftStop).append(" (")
+           .append(shiftDuration.toMinutes()).append(" minutes); Lunch: ")
+           .append(lunchStart).append(" - ")
+           .append(lunchStop).append(" (")
+           .append(lunchDuration.toMinutes()).append(" minutes)");
       
     
     return builder.toString();

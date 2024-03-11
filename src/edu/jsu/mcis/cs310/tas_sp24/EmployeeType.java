@@ -1,7 +1,6 @@
 package edu.jsu.mcis.cs310.tas_sp24;
 
 public enum EmployeeType {
-    //Test
 
     PART_TIME("Temporary / Part-Time"),
     FULL_TIME("Full-Time");

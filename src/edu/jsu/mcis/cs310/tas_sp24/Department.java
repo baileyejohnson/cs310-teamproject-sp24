@@ -22,9 +22,11 @@ public class Department {
     public int getId(){
         return id;
     }
+    
     public String getDescription(){
         return description;
     }
+    
     public int getTerminalId(){
         return terminalid;
     }
@@ -32,9 +34,11 @@ public class Department {
     @Override
     public String toString(){
         StringBuilder dpString = new StringBuilder();
+        
         dpString.append('#').append(id).append(' ');
         dpString.append('(').append(description).append(')');
         dpString.append(',').append(" Terminal ID: ").append(terminalid);
+        
         return dpString.toString();
     }
 }

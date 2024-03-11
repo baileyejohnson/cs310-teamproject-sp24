@@ -40,7 +40,7 @@ public Employee(Integer id, String firstname, String middlename, String lastname
         return id;
     }
     
-      public String getFirstname() {
+    public String getFirstname() {
         return firstname;
     }
     
@@ -77,13 +77,13 @@ public Employee(Integer id, String firstname, String middlename, String lastname
     @Override
     public String toString() {
         
-       StringBuilder empstring = new StringBuilder();
+       StringBuilder employeestring = new StringBuilder();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-         empstring.append("ID #").append(id).append(": ").append(lastname).append(", ").append(firstname)
+         employeestring.append("ID #").append(id).append(": ").append(lastname).append(", ").append(firstname)
                   .append(" ").append(middlename).append(" (#").append(badge.getId()).append("), Type: ") 
                   .append(employeeType).append(", Department: ").append(department.getDescription()).append(", Active: ").append(active.format(format));
             
          
-        return empstring.toString();
+        return employeestring.toString();
     }
 }
