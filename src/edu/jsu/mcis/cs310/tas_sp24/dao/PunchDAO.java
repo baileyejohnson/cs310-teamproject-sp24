@@ -24,8 +24,12 @@ import java.util.Objects;
 public class PunchDAO {
     private static final String QUERY_FIND = "SELECT * FROM event WHERE id = ?";
     private static final String QUERY_CREATE = "INSERT INTO event(terminalid,badgeid,timestamp,eventtypeid)VALUES(?,?,?,?)";
-    private static final String QUERY_LIST = "SELECT * FROM event WHERE badgeid = ? ORDER BY timestamp";
+    private static final String QUERY_LIST = "SELECT * FROM event WHERE badgeid = ? ORDER BY timestamp ASC";
+    private static final String QUERY_NEXT_DAY_PUNCHES = "SELECT * FROM event " + "WHERE badgeid = ? AND timestamp > ? AND (punchtype = 'CLOCK_OUT' OR punchtype = 'TIMEOUT') " +
+        "ORDER BY timestamp ASC LIMIT 1";
 
+    
+        
     private final DAOFactory daoFactory;
 
     PunchDAO(DAOFactory daoFactory) {
@@ -187,84 +191,77 @@ public class PunchDAO {
     
 
 
-       public ArrayList list (Badge badge , LocalDate date) {
-           
-        ArrayList <Punch> list = new ArrayList();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        
-         try {
+    public ArrayList<Punch> list(Badge badge, LocalDate date) {
+    ArrayList<Punch> list = new ArrayList<>();
+    PreparedStatement ps = null;
+    ResultSet rs = null;
 
-                Connection conn = daoFactory.getConnection();
+    try {
+        Connection conn = daoFactory.getConnection();
 
-                if (conn.isValid(0)) {
-                    
-                    ps = conn.prepareStatement(QUERY_LIST);
-                    ps.setString(1, badge.getId());
+        if (conn.isValid(0)) {
+            ps = conn.prepareStatement(QUERY_LIST);
+            ps.setString(1, badge.getId());
 
-                    boolean hasresults = ps.execute();
+            boolean hasResults = ps.execute();
 
-                    if (hasresults) {
+            if (hasResults) {
+                rs = ps.getResultSet();
 
-                        rs = ps.getResultSet();
+                while (rs.next()) {
+                    LocalDate l_date = rs.getTimestamp(4).toLocalDateTime().toLocalDate();
 
-                        while (rs.next()) {
-                            LocalDate l_date = rs.getTimestamp("timestamp").toLocalDateTime().toLocalDate();
-                            
-
-                                if (l_date.equals(date)) {
-                                  int id = rs.getInt("id");
-                                  list.add(find(id));
-                        }
-
+                    if (l_date.equals(date)) {
+                        int id = rs.getInt(1);
+                        list.add(find(id));
                     }
-
                 }
-                    
-
             }
-                
-            
-                    
 
-                             
+            // Check if the last punch of the day is CLOCK_IN
+            if (!list.isEmpty() && list.get(list.size() - 1).getPunchtype() == EventType.CLOCK_IN) {
+                LocalDateTime lastPunchDate = list.get(list.size() - 1).getOriginaltimestamp();
+                Timestamp lastPunchTimestamp = Timestamp.valueOf(lastPunchDate);
 
-                    
-                        
-                        
-                    
+                // Fetch punches from the next day
+                ps = conn.prepareStatement(QUERY_NEXT_DAY_PUNCHES);
+                ps.setString(1, badge.getId());
+                ps.setTimestamp(2, lastPunchTimestamp);
 
-                
+                hasResults = ps.execute();
 
-            
+                if (hasResults) {
+                    rs = ps.getResultSet();
 
-        } catch (SQLException e) {
+                    // Fetch the first CLOCK_OUT or TIMEOUT punch from the next day
+                    while (rs.next()) {
+                        int id = rs.getInt(1);
+                        Punch punch = find(id);
 
-            throw new DAOException(e.getMessage());
-
-        } finally {
-
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    throw new DAOException(e.getMessage());
+                        if (punch.getPunchtype() == EventType.CLOCK_OUT || punch.getPunchtype() == EventType.TIME_OUT) {
+                            list.add(punch);
+                            break;  // Stop after adding the first CLOCK_OUT or TIMEOUT punch
+                        }
+                    }
                 }
+            }
+        }
+    } catch (SQLException e) {
+        throw new DAOException(e.getMessage());
+    } finally {
+        try {
+            if (rs != null) {
+                rs.close();
             }
             if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    throw new DAOException(e.getMessage());
-                }
+                ps.close();
             }
-
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
         }
     }
-        return list;
 
-    
-    
+    return list;
     }
-}
 
+}
