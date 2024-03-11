@@ -22,7 +22,7 @@ public class Punch {
     private EventType punchType;
     private LocalDateTime originalTimestamp;
     private PunchAdjustmentType adjustedTimestamp; 
-    private Shift s;
+    private Shift shift;
     private Shift start;
     private Shift end;
     private LocalTime shiftStart;
@@ -46,62 +46,14 @@ public class Punch {
         this.punchType = punchType;
     }
     
-    public void adjust(Shift s){
-        this.s = s;
+    public void adjust(Shift shift){
+        this.shift = shift;
     }
     
     public LocalTime printAdjusted(){
         return shiftStart;
     }
-    /*
-    WORSHOP PUEUDO CODE
-    LOGIC FOR EARLY AND LATE TIME
-      k-i = j
-    i = 8:00
-    k = 8:03
-    k = date
-    i = time
-    j= minutes late
-    if (late but grace){
-        j-k = your time
-    }
-    else{
-        k- (-j) = early time
-    }
-    gp = grace period
-    if(j <= 5){
-        interval = k-i
-        return interval
-    }
-    else
-    {
-        Dock = i + 15 minutes;
-        return Dock;
-    }
     
-    LD = lunchDuration
-    LD = 30(min)
-    lStart = true
-    lStop = false
-    if(LD > 30 minutes){
-        lStop = True;
-        return LD;
-    }
-    shiftStop = false;
-    if(shiftStop == true){
-    l = exit time
-        if(l < 5 minutes){
-            grace = l - 5;
-            return grace;
-        }
-        else{
-            l - 15;
-            return l;
-        }
-    }
-    
-    */
-
     public Integer getId() {
         return id;
     }

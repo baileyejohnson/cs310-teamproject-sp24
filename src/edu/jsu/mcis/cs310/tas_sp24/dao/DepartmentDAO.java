@@ -27,8 +27,8 @@ public class DepartmentDAO {
     }
     //dpfind(termid)
     
-     public Department find(int id){
-         Department dp = null;
+    public Department find(int id){
+        Department department = null;
 
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -51,7 +51,7 @@ public class DepartmentDAO {
                     while (rs.next()) {
                         String description = rs.getString("description");
                         int terminalid = rs.getInt("terminalid");
-                        dp = new Department(id, description, terminalid);
+                        department = new Department(id, description, terminalid);
 
                     }
 
@@ -63,7 +63,7 @@ public class DepartmentDAO {
          
          catch (SQLException e) {
 
-            throw new DAOException(e.getMessage());
+        throw new DAOException(e.getMessage());
 
         } finally {
 
@@ -84,8 +84,6 @@ public class DepartmentDAO {
 
         }
         
-         return dp;
-         
-     
-     
-}}
+        return department;        
+    }
+}

@@ -12,10 +12,10 @@ public class Department {
     private  int id, terminalid;
     private  String description;
 
-    public Department(int id, String description, int termid) {
+    public Department(int id, String description, int terminalid) {
         this.id = id;
         this.description = description;
-        this.terminalid = termid;
+        this.terminalid = terminalid;
     }
     
    
@@ -25,7 +25,7 @@ public class Department {
     public String getDescription(){
         return description;
     }
-    public int getTermid(){
+    public int getTerminalId(){
         return terminalid;
     }
     

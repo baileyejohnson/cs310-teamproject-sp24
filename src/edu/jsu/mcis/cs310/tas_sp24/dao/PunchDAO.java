@@ -123,7 +123,7 @@ public class PunchDAO {
         
         Integer Empid =emp.getId();
         Department department = departmentdao.find(Empid);
-        Integer Terminalid = department.getTermid();
+        Integer Terminalid = department.getTerminalId();
         
         
         
@@ -246,9 +246,13 @@ public class PunchDAO {
                 }
             }
         }
+        
     } catch (SQLException e) {
+        
         throw new DAOException(e.getMessage());
+        
     } finally {
+        
         try {
             if (rs != null) {
                 rs.close();
@@ -256,6 +260,7 @@ public class PunchDAO {
             if (ps != null) {
                 ps.close();
             }
+            
         } catch (SQLException e) {
             throw new DAOException(e.getMessage());
         }
