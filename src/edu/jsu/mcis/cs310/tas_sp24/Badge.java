@@ -9,10 +9,12 @@ public class Badge {
         this.description = description;
     }
 
+    //Makes a Getter method for the ID from the database and returns it as a string
     public String getId() {
         return id;
     }
 
+    ///Makes a Getter method for the Description and returns the description string variable
     public String getDescription() {
         return description;
     }
@@ -20,12 +22,12 @@ public class Badge {
     @Override
     public String toString() {
 
-        StringBuilder s = new StringBuilder();
+        StringBuilder string = new StringBuilder();
 
-        s.append('#').append(id).append(' ');
-        s.append('(').append(description).append(')');
+        string.append('#').append(id).append(' ');
+        string.append('(').append(description).append(')');
 
-        return s.toString();
+        return string.toString();
 
     }
 

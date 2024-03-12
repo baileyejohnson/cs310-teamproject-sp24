@@ -61,7 +61,6 @@ public class ShiftDAO {
                         shiftInfo.put("lunchThreshold", rs.getString("lunchthreshold"));
                         shift = new Shift (shiftInfo);
                         
-
                     }
 
                 }
