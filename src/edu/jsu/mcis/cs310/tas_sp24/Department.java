@@ -12,13 +12,14 @@ public class Department {
     private  int id, terminalid;
     private  String description;
 
+    //Constructor for creating a Department object 
     public Department(int id, String description, int terminalid) {
         this.id = id;
         this.description = description;
         this.terminalid = terminalid;
     }
     
-   
+   //Getter Methods
     public int getId(){
         return id;
     }
@@ -31,6 +32,7 @@ public class Department {
         return terminalid;
     }
     
+    //Generates a string representation of the Department object, including ID, description, and terminal ID.
     @Override
     public String toString(){
         StringBuilder dpString = new StringBuilder();
@@ -40,5 +42,6 @@ public class Department {
         dpString.append(',').append(" Terminal ID: ").append(terminalid);
         
         return dpString.toString();
+        
     }
 }
