@@ -52,13 +52,9 @@ public class DepartmentDAO {
                         String description = rs.getString("description");
                         int terminalid = rs.getInt("terminalid");
                         department = new Department(id, description, terminalid);
-
                     }
-
                 }
-
             }
-
         }
          
          catch (SQLException e) {
@@ -81,9 +77,7 @@ public class DepartmentDAO {
                     throw new DAOException(e.getMessage());
                 }
             }
-
         }
-        
         return department;        
     }
 }
