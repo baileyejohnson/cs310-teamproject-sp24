@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
  * @author TIMI
  */
 public class EmployeeDAO {
+    // creates DAO Factory object
     private final DAOFactory daoFactory;
     
     private static final String QUERY_FIND = "SELECT * FROM employee WHERE id = ?";
@@ -29,7 +30,7 @@ public class EmployeeDAO {
 
         this.daoFactory = daoFactory;
     }
-    
+    // method for finds parts in the database for Employee
     public Employee find(int id){
         
         Employee employee = null;
@@ -51,9 +52,8 @@ public class EmployeeDAO {
                 if (hasresults) {
 
                     rs = ps.getResultSet();
-
+                      // gives information to the Employee
                     while (rs.next()) {
-                        
                         BadgeDAO badgedao = new BadgeDAO(daoFactory);
                         ShiftDAO shiftdao = new ShiftDAO(daoFactory);
                         DepartmentDAO departmentdao = new DepartmentDAO(daoFactory);

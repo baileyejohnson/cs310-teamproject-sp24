@@ -13,6 +13,9 @@ import java.time.format.DateTimeFormatter;
  * @author utsav
  */
 public class Employee {
+    
+    // Classes
+    
     private Integer id;
     private String firstname, middlename, lastname;
     private LocalDateTime active;
@@ -25,6 +28,8 @@ public class Employee {
 public Employee(Integer id, String firstname, String middlename, String lastname, LocalDateTime active, Badge badge, 
             Department department, Shift shift, EmployeeType employeeType) 
     {
+        // gathers information for the classes
+        
         this.id = id;
         this.firstname = firstname;
         this.middlename = middlename;
