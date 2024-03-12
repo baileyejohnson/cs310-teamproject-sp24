@@ -37,7 +37,7 @@ public class Punch {
         this.adjustedTimestamp = null;
     }
 
-   
+    // Constructor for existing punches with specified ID and timestamps
     public Punch(Integer id, Integer terminalid, Badge badge, LocalDateTime originalTimestamp, EventType punchType) {
         this.id = id;
         this.terminalid = terminalid;
@@ -46,14 +46,17 @@ public class Punch {
         this.punchType = punchType;
     }
     
+    // Adjusts the punch timestamp based on the provided shift information.
     public void adjust(Shift shift){
         this.shift = shift;
     }
     
+    // Prints the adjusted timestamp of the punch.
     public LocalTime printAdjusted(){
         return shiftStart;
     }
     
+    // Getter methods
     public Integer getId() {
         return id;
     }
@@ -77,7 +80,8 @@ public class Punch {
     public PunchAdjustmentType getAdjustedTimestamp() {
         return adjustedTimestamp;
     }
-
+    
+    // Prints the original timestamp of the punch in a formatted string.
     public String printOriginal() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
         DayOfWeek dayOfTheWeek = originalTimestamp.getDayOfWeek(); 

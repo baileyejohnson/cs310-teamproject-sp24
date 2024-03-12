@@ -44,7 +44,7 @@ public class Shift {
         this.shiftDuration = Duration.between(shiftStart,shiftStop);
     }
 
-    // Getters for instance fields
+    // Getters methods
     public Integer getId() {
         return id;
     }
@@ -92,7 +92,8 @@ public class Shift {
     public Duration getShiftDuration() {
         return shiftDuration;
     }
-
+    
+    //Generates a string representation of the Shift object, including its description, shift times, and lunch breaks.
     @Override
     public String toString() {
     StringBuilder builder = new StringBuilder();
@@ -107,5 +108,6 @@ public class Shift {
       
     
     return builder.toString();
+    
     }
 }
