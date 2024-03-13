@@ -209,10 +209,10 @@ public class PunchDAO {
                 rs = ps.getResultSet();
 
                 while (rs.next()) {
-                    LocalDate l_date = rs.getTimestamp(4).toLocalDateTime().toLocalDate();
+                    LocalDate l_date = rs.getTimestamp("timestamp").toLocalDateTime().toLocalDate();
 
                     if (l_date.equals(date)) {
-                        int id = rs.getInt(1);
+                        int id = rs.getInt("id");
                         list.add(find(id));
                     }
                 }
