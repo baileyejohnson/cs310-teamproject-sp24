@@ -61,10 +61,10 @@ public class PunchDAO {
 
                     while (rs.next()) {
                          
-                         LocalDateTime timestamp = rs.getTimestamp("timestamp").toLocalDateTime();
-                         int terminalId = rs.getInt("terminalid");
+                        LocalDateTime timestamp = rs.getTimestamp("timestamp").toLocalDateTime();
+                        int terminalId = rs.getInt("terminalid");
 
-                       // Getting badge
+                        // Getting badge
                         String badgeid = rs.getString("badgeid");
                         Badge badge = daoFactory.getBadgeDAO().find(badgeid);
 

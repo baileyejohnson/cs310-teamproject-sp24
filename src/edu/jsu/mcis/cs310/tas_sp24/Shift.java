@@ -11,7 +11,6 @@ package edu.jsu.mcis.cs310.tas_sp24;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Shift {
     private Integer id;
@@ -40,8 +39,14 @@ public class Shift {
         this.lunchStart = LocalTime.parse((String) shiftInfo.get("lunchStart"));
         this.lunchStop = LocalTime.parse((String) shiftInfo.get("lunchStop"));
         this.lunchThreshold = Integer.parseInt((String) shiftInfo.get("lunchThreshold"));
-        this.lunchDuration = Duration.between(lunchStart,lunchStop);
-        this.shiftDuration = Duration.between(shiftStart,shiftStop);
+        this.lunchDuration = Duration.between(lunchStart,lunchStop); 
+        // Check for time duration between differant dates
+        if (Duration.between(shiftStart,shiftStop).isNegative()) {
+            this.shiftDuration = Duration.between(shiftStart,shiftStop).plusDays(1);
+        } else { 
+            this.shiftDuration = Duration.between(shiftStart,shiftStop);
+        } 
+        
     }
 
     // Getters methods
