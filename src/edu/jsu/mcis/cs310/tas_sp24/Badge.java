@@ -1,7 +1,9 @@
 package edu.jsu.mcis.cs310.tas_sp24;
 
 public class Badge {
-
+    
+    // establishes id and description objects
+    
     private final String id, description;
 
     public Badge(String id, String description) {
@@ -9,23 +11,27 @@ public class Badge {
         this.description = description;
     }
 
+    //Makes a Getter method for the ID from the database and returns it as a string
     public String getId() {
         return id;
     }
 
+    ///Makes a Getter method for the Description and returns the description string variable
     public String getDescription() {
         return description;
     }
 
+        // adds characters
+    
     @Override
     public String toString() {
 
-        StringBuilder s = new StringBuilder();
+        StringBuilder string = new StringBuilder();
 
-        s.append('#').append(id).append(' ');
-        s.append('(').append(description).append(')');
+        string.append('#').append(id).append(' ');
+        string.append('(').append(description).append(')');
 
-        return s.toString();
+        return string.toString();
 
     }
 

@@ -102,7 +102,7 @@ public class EmployeeDAO {
         
          return employee;
 }
-     
+     // find method
     public Employee find(Badge badge){
         
         Employee employee = null;
@@ -148,7 +148,7 @@ public class EmployeeDAO {
         }
 
         
-         
+         // throw and exception messages
         catch (SQLException e) {
 
             throw new DAOException(e.getMessage());

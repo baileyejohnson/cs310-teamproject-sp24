@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class ShiftDAO {
+    
+    // create objects
     private static final String QUERY_FIND_BY_ID = "SELECT * FROM shift WHERE id = ?";
     private static final String QUERY_FIND_BY_BADGE = "SELECT shiftid FROM employee WHERE badgeid = ?";
 
@@ -24,7 +26,7 @@ public class ShiftDAO {
 
     }
     
-
+// find method
     public Shift find(int id) {
 
         Shift shift = null;
@@ -47,7 +49,9 @@ public class ShiftDAO {
                     rs = ps.getResultSet();
 
                     while (rs.next()) {
-
+                        
+                        // stroes information in to shift
+                        
                         HashMap<String, String> shiftInfo = new HashMap<>();
                         shiftInfo.put("id", rs.getString("id"));
                         shiftInfo.put("description", rs.getString("description"));
@@ -61,7 +65,6 @@ public class ShiftDAO {
                         shiftInfo.put("lunchThreshold", rs.getString("lunchthreshold"));
                         shift = new Shift (shiftInfo);
                         
-
                     }
 
                 }
