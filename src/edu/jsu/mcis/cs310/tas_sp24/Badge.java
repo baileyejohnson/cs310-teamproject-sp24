@@ -1,7 +1,9 @@
 package edu.jsu.mcis.cs310.tas_sp24;
 
 public class Badge {
-
+    
+    // establishes id and description objects
+    
     private final String id, description;
 
     public Badge(String id, String description) {
@@ -17,6 +19,8 @@ public class Badge {
         return description;
     }
 
+        // adds characters
+    
     @Override
     public String toString() {
 

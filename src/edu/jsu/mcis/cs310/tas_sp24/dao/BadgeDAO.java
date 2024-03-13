@@ -4,11 +4,13 @@ import edu.jsu.mcis.cs310.tas_sp24.Badge;
 import java.sql.*;
 
 public class BadgeDAO {
-
+  
     private static final String QUERY_FIND = "SELECT * FROM badge WHERE id = ?";
 
     private final DAOFactory daoFactory;
 
+    
+    
     BadgeDAO(DAOFactory daoFactory) {
 
         this.daoFactory = daoFactory;
