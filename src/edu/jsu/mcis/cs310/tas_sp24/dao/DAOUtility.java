@@ -5,6 +5,7 @@ import java.util.*;
 import java.time.temporal.ChronoUnit;
 import java.time.format.DateTimeFormatter;
 import com.github.cliftonlabs.json_simple.*;
+import edu.jsu.mcis.cs310.tas_sp24.Punch;
 
 /**
  * 
@@ -14,5 +15,9 @@ import com.github.cliftonlabs.json_simple.*;
  * 
  */
 public final class DAOUtility {
+
+    public static String getPunchListAsJSON(ArrayList<Punch> dailypunchlist) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

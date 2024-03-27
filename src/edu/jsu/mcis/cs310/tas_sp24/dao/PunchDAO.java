@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.time.DayOfWeek;
 
 public class PunchDAO {
     private static final String QUERY_FIND = "SELECT * FROM event WHERE id = ?";
@@ -205,8 +206,8 @@ public class PunchDAO {
 
             boolean hasResults = ps.execute();
 
-            if (hasResults) {
                 rs = ps.getResultSet();
+            if (hasResults) {
 
                 while (rs.next()) {
                     LocalDate l_date = rs.getTimestamp("timestamp").toLocalDateTime().toLocalDate();
@@ -217,7 +218,17 @@ public class PunchDAO {
                     }
                 }
             }
-
+            // Get Badge ID
+            //need actual Date is issue
+            //Need getDayOfMonth
+            //Add DayOfWeek of originalTimeStamp to get Mon-Sat etc.
+            
+            //Gets the badgeId and sets the string for it.
+             String badgeid = rs.getString("badgeid");
+             ps.setString(0, badge.getId());
+             //Getting Day of Week working
+             DayOfWeek dayOfTheWeek = originalTimestamp.getDayOfWeek();
+            
             // Check if the last punch of the day is CLOCK_IN
             if (!list.isEmpty() && list.get(list.size() - 1).getPunchtype() == EventType.CLOCK_IN) {
                 LocalDateTime lastPunchDate = list.get(list.size() - 1).getOriginaltimestamp();
