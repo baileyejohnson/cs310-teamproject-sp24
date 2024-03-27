@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.time.DayOfWeek;
 
 public class PunchDAO {
     private static final String QUERY_FIND = "SELECT * FROM event WHERE id = ?";
@@ -196,16 +197,15 @@ public class PunchDAO {
         ArrayList<Punch> list = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
-
+        
         try {
             Connection conn = daoFactory.getConnection();
-
             if (conn.isValid(0)) {
+                
                 ps = conn.prepareStatement(QUERY_LIST);
                 ps.setString(1, badge.getId());
-
                 boolean hasResults = ps.execute();
-
+                
                 if (hasResults) {
                     rs = ps.getResultSet();
 
@@ -218,27 +218,27 @@ public class PunchDAO {
                         }
                     }
                 }
-
+                
                 // Check if the last punch of the day is CLOCK_IN
                 if (!list.isEmpty() && list.get(list.size() - 1).getPunchtype() == EventType.CLOCK_IN) {
                     LocalDateTime lastPunchDate = list.get(list.size() - 1).getOriginaltimestamp();
                     Timestamp lastPunchTimestamp = Timestamp.valueOf(lastPunchDate);
-
+                    
                     // Fetch punches from the next day
                     ps = conn.prepareStatement(QUERY_NEXT_DAY_PUNCHES);
                     ps.setString(1, badge.getId());
                     ps.setTimestamp(2, lastPunchTimestamp);
-
                     hasResults = ps.execute();
-
+                    
                     if (hasResults) {
                         rs = ps.getResultSet();
-
+                        
                         // Fetch the first CLOCK_OUT or TIMEOUT punch from the next day
                         while (rs.next()) {
+                            
                             int id = rs.getInt(1);
                             Punch punch = find(id);
-
+                            
                             if (punch.getPunchtype() == EventType.CLOCK_OUT || punch.getPunchtype() == EventType.TIME_OUT) {
                                 list.add(punch);
                                 break;  // Stop after adding the first CLOCK_OUT or TIMEOUT punch
@@ -266,8 +266,8 @@ public class PunchDAO {
                 throw new DAOException(e.getMessage());
             }
         }
-
+        
         return list;
+        
         }
-
     }

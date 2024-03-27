@@ -10,6 +10,9 @@ import edu.jsu.mcis.cs310.tas_sp24.Punch;
 import edu.jsu.mcis.cs310.tas_sp24.PunchAdjustmentType;
 import edu.jsu.mcis.cs310.tas_sp24.Shift;
 
+import edu.jsu.mcis.cs310.tas_sp24.Punch;
+
+
 /**
  * 
  * Utility class for DAOs.  This is a final, non-constructable class containing
@@ -22,6 +25,7 @@ public final class DAOUtility {
      public static int calculateTotalMinutes(ArrayList<Punch> dailypunchlist, Shift shift) {
         long totalMinutes = 0;
         long shiftDuration = 0;
+
 
         boolean shiftStarted = false;
         boolean shiftEnded = false;
