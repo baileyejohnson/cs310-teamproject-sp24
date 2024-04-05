@@ -141,29 +141,6 @@ public class Punch {
         
     }
 
-    public String printAdjusted(){
-        StringBuilder s = new StringBuilder();
-        
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-        DayOfWeek dayOfTheWeek = originalTimestamp.getDayOfWeek(); 
-    
-        s.append("#")
-        .append(badge.getId()).append(" ")
-        .append(punchType).append(": ")
-        .append(dayOfTheWeek.name().substring(0, 3))
-        .append(" ")
-        .append(adjustedTime.format(format))
-        .append(" (").append(adjustedTimestamp).append(")");
-    
-        return s.toString();
- 
-    }
-    
-    // Prints the adjusted timestamp of the punch.
-    /*public LocalTime printAdjusted(){
-        return shiftStart;
-    }*/
-    
     // Getter methods
     public Integer getId() {
         return id;
@@ -209,6 +186,30 @@ public class Punch {
         
         return build.toString();
     }
+    
+      public String printAdjusted(){
+        StringBuilder build = new StringBuilder();
+        
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+        DayOfWeek dayOfTheWeek = originalTimestamp.getDayOfWeek(); 
+    
+        build.append("#")
+             .append(badge.getId()).append(" ")
+             .append(punchType).append(": ")
+             .append(dayOfTheWeek.name().substring(0, 3))
+             .append(" ")
+             .append(adjustedTime.format(format))
+             .append(" (").append(adjustedTimestamp).append(")");
+    
+        return build.toString();
+ 
+    }
+    
+    // Prints the adjusted timestamp of the punch.
+    /*public LocalTime printAdjusted(){
+        return shiftStart;
+    }*/
+    
     
     @Override
     public String toString() {
