@@ -31,7 +31,7 @@ public final class DAOUtility {
 
         for (Punch punch : dailypunchlist) {
             EventType eventType = punch.getPunchtype();
-            LocalDateTime punchTimestamp = punch.getAdjustedTime();
+            LocalDateTime punchTimestamp = punch.getAdjustedTimestamp();
 
             switch (eventType) {
                 case CLOCK_IN:
@@ -78,4 +78,4 @@ public final class DAOUtility {
 
         return (int) totalWorkedMinutes;
         }
-    }
+}
