@@ -79,4 +79,19 @@ public class EmployeeFindTest {
 
     }
     
+    @Test
+    public void testFindEmployee5() {
+        
+        EmployeeDAO employeeDAO = daoFactory.getEmployeeDAO();
+
+        /* Retrieve Employee from Database (by ID) */
+
+        Employee e1 = employeeDAO.find(58);
+
+        /* Compare to Expected Values */
+        
+        assertEquals("ID #58: Cordero, Alvina P (#87176FD7), Type: Full-Time, Department: Grinding, Active: 01/31/2016", e1.toString());
+
+    }
+    
 }

@@ -26,9 +26,7 @@ public class PunchDAO {
     private static final String QUERY_FIND = "SELECT * FROM event WHERE id = ?";
     private static final String QUERY_CREATE = "INSERT INTO event(terminalid,badgeid,timestamp,eventtypeid)VALUES(?,?,?,?)";
     private static final String QUERY_LIST = "SELECT * FROM event WHERE badgeid = ? ORDER BY timestamp ASC";
-    private static final String QUERY_NEXT_DAY_PUNCHES = "SELECT * FROM event " + "WHERE badgeid = ? AND timestamp > ? AND (punchtype = 'CLOCK_OUT' OR punchtype = 'TIMEOUT') " +
-        "ORDER BY timestamp ASC LIMIT 1";
-
+    private static final String QUERY_NEXT_DAY_PUNCHES = "SELECT * FROM event WHERE badgeid = ? AND timestamp > ? LIMIT 1";
     
         
     private final DAOFactory daoFactory;

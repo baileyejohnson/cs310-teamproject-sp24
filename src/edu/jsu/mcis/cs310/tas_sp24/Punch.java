@@ -21,8 +21,8 @@ public class Punch {
     private Badge badge;
     private EventType punchType;
     private LocalDateTime originalTimestamp;
-    private PunchAdjustmentType adjustedTimestamp; 
-    private LocalDateTime adjustedTime;
+    private PunchAdjustmentType adjustmenttype; 
+    private LocalDateTime adjustedTimestamp;
     private Shift shift;
     private Shift start;
     private Shift end;
@@ -35,6 +35,7 @@ public class Punch {
     * @param terminalid The ID of the terminal where the punch event occurred.
     * @param badge The Badge object associated with the employee who made the punch.
     * @param punchType The type of punch event (CLOCK_IN, CLOCK_OUT, or TIME_OUT).
+    * 
     */
     public Punch(Integer terminalid, Badge badge, EventType punchType) {
         this.id = null;
@@ -42,7 +43,7 @@ public class Punch {
         this.badge = badge;
         this.punchType = punchType;
         this.originalTimestamp =LocalDateTime.now();
-        this.adjustedTimestamp = null;
+        this.adjustmenttype = null;
     }
 
     /**
@@ -70,13 +71,13 @@ public class Punch {
     public void adjust(Shift shift){
         
       
+        adjustmenttype = null;
         adjustedTimestamp = null;
-        adjustedTime = null;
-        boolean weekend = false;
+        boolean isWeekend = false;
         DayOfWeek day = originalTimestamp.getDayOfWeek();
 
         if (day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
-            weekend = true;
+            isWeekend = true;
         }
         
         int interval = shift.getRoundInterval();
@@ -103,35 +104,35 @@ public class Punch {
 
         if (punchType == EventType.CLOCK_IN) {
             if (originalTimestamp.isAfter(shiftStartInterval.minusSeconds(1)) && originalTimestamp.isBefore(shiftStartDateTime)) {
-                adjustedTime = shiftStartDateTime;
-                adjustedTimestamp = PunchAdjustmentType.SHIFT_START;
+                adjustedTimestamp = shiftStartDateTime;
+                adjustmenttype = PunchAdjustmentType.SHIFT_START;
             } else if (originalTimestamp.isAfter(shiftStartDateTime) && originalTimestamp.isBefore(shiftStartGrace)) {
-                adjustedTime = shiftStartDateTime;
-                adjustedTimestamp = PunchAdjustmentType.SHIFT_START;
+                adjustedTimestamp = shiftStartDateTime;
+                adjustmenttype = PunchAdjustmentType.SHIFT_START;
             } else if (originalTimestamp.isAfter(shiftStartGrace) && originalTimestamp.isBefore(shiftStartDock.plusSeconds(1))) {
-                adjustedTime = shiftStartDock;
-                adjustedTimestamp = PunchAdjustmentType.SHIFT_DOCK;
-            } else if (!weekend && originalTimestamp.isAfter(lunchStartDateTime) && originalTimestamp.isBefore(lunchStopDateTime)) {
-                adjustedTime = lunchStopDateTime;
-                adjustedTimestamp = PunchAdjustmentType.LUNCH_STOP;
+                adjustedTimestamp = shiftStartDock;
+                adjustmenttype = PunchAdjustmentType.SHIFT_DOCK;
+            } else if (!isWeekend && originalTimestamp.isAfter(lunchStartDateTime) && originalTimestamp.isBefore(lunchStopDateTime)) {
+                adjustedTimestamp = lunchStopDateTime;
+                adjustmenttype = PunchAdjustmentType.LUNCH_STOP;
             }
         } else if (punchType == EventType.CLOCK_OUT || punchType == EventType.TIME_OUT) {
             if (originalTimestamp.isAfter(shiftStopDateTime) && originalTimestamp.isBefore(shiftStopInterval.plusSeconds(1))) {
-                adjustedTime = shiftStopDateTime;
-                adjustedTimestamp = PunchAdjustmentType.SHIFT_STOP;
+                adjustedTimestamp = shiftStopDateTime;
+                adjustmenttype = PunchAdjustmentType.SHIFT_STOP;
             } else if (originalTimestamp.isBefore(shiftStopDateTime) && originalTimestamp.isAfter(shiftStopGrace)) {
-                adjustedTime = shiftStopDateTime;
-                adjustedTimestamp = PunchAdjustmentType.SHIFT_STOP;
+                adjustedTimestamp = shiftStopDateTime;
+                adjustmenttype = PunchAdjustmentType.SHIFT_STOP;
             } else if (originalTimestamp.isBefore(shiftStopGrace) && originalTimestamp.isAfter(shiftStopDock.minusSeconds(1))) {
-                adjustedTime = shiftStopDock;
-                adjustedTimestamp = PunchAdjustmentType.SHIFT_DOCK;
-            } else if (!weekend && originalTimestamp.isAfter(lunchStartDateTime) && originalTimestamp.isBefore(lunchStopDateTime)) {
-                adjustedTime = lunchStartDateTime;
-                adjustedTimestamp = PunchAdjustmentType.LUNCH_START;
+                adjustedTimestamp = shiftStopDock;
+                adjustmenttype = PunchAdjustmentType.SHIFT_DOCK;
+            } else if (!isWeekend && originalTimestamp.isAfter(lunchStartDateTime) && originalTimestamp.isBefore(lunchStopDateTime)) {
+                adjustedTimestamp = lunchStartDateTime;
+                adjustmenttype = PunchAdjustmentType.LUNCH_START;
             }
         }
         
-        if (adjustedTimestamp == null) {
+        if (adjustmenttype == null) {
 	    int adjustMinute;
             int minutes = originalTimestamp.getMinute();
             
@@ -142,43 +143,21 @@ public class Punch {
             }
             
             if ((adjustMinute / 60) == 1) {
-	        adjustedTimestamp = PunchAdjustmentType.INTERVAL_ROUND;
-	        adjustedTime = originalTimestamp.withHour(originalTimestamp.getHour() + 1).withMinute(0).withSecond(0).withNano(0);
+	        adjustmenttype = PunchAdjustmentType.INTERVAL_ROUND;
+	        adjustedTimestamp = originalTimestamp.withHour(originalTimestamp.getHour() + 1).withMinute(0).withSecond(0).withNano(0);
 	    } else {
-	        adjustedTimestamp = PunchAdjustmentType.INTERVAL_ROUND;
-	        adjustedTime = originalTimestamp.withMinute(adjustMinute).withSecond(0).withNano(0);
+	        adjustmenttype = PunchAdjustmentType.INTERVAL_ROUND;
+	        adjustedTimestamp = originalTimestamp.withMinute(adjustMinute).withSecond(0).withNano(0);
 	    }
-            if((originalTimestamp.getMinute() == adjustedTime.getMinute() ) && (originalTimestamp.getHour() == adjustedTime.getHour())){
-                adjustedTime = originalTimestamp.withSecond(0).withNano(0);
-                adjustedTimestamp = PunchAdjustmentType.NONE;
+            if((originalTimestamp.getMinute() == adjustedTimestamp.getMinute() ) && (originalTimestamp.getHour() == adjustedTimestamp.getHour())){
+                adjustedTimestamp = originalTimestamp.withSecond(0).withNano(0);
+                adjustmenttype = PunchAdjustmentType.NONE;
             }
             
 	}  
         
     }
-    /**
-     * Prints the adjusted timestamp of the punch in a formatted string.
-     * @return The adjusted timestamp with the badge, punchType, day of the week, and adjustment type.
-     */
-    public String printAdjusted(){
-        StringBuilder s = new StringBuilder();
-        
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-        DayOfWeek dayOfTheWeek = adjustedTime.getDayOfWeek(); 
-    
-        s.append("#")
-        .append(badge.getId()).append(" ")
-        .append(punchType).append(": ")
-        .append(dayOfTheWeek.name().substring(0, 3))
-        .append(" ")
-        .append(adjustedTime.format(format))
-        .append(" (").append(adjustedTimestamp).append(")");
-    
-        return s.toString();
- 
-    }
-    
-    
+
     // Getter methods
     /**
      * Gets the ID of the punch event.
@@ -207,7 +186,7 @@ public class Punch {
     public Badge getBadge() {
         return badge;
     }
-    
+
     /**
      * Gets the event type determining if its clock in, clock out, or time out.
      * @return The Event type.
@@ -215,7 +194,7 @@ public class Punch {
     public EventType getPunchtype() {
         return punchType;
     }
-    
+
     /**
      * Gets the original timestamp of the punch event.
      * 
@@ -224,20 +203,20 @@ public class Punch {
     public LocalDateTime getOriginaltimestamp() {
         return originalTimestamp;
     }
-    
+
     /**
      * Gets the adjustment type of the punch.
      * @return The Punch Adjustment Type.
      */
-    public PunchAdjustmentType getAdjustedTimestamp() {
-        return adjustedTimestamp;
+    public PunchAdjustmentType getAdjustmentType() {
+        return adjustmenttype;
     }
     /**
      * Gets the adjusted timestamp of the punch.
      * @return The adjusted timestamp of the punch.
      */
-    public LocalDateTime getAdjustedTime(){
-        return adjustedTime;
+    public LocalDateTime getAdjustedTimestamp(){
+        return adjustedTimestamp;
     }
     
     /**
@@ -260,6 +239,28 @@ public class Punch {
         
         return build.toString();
     }
+    /**
+     * Prints the adjusted timestamp of the punch in a formatted string.
+     * @return The adjusted timestamp with the badge, punchType, day of the week, and adjustment type.
+     */
+    public String printAdjusted(){
+        StringBuilder build = new StringBuilder();
+        
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+        DayOfWeek dayOfTheWeek = originalTimestamp.getDayOfWeek(); 
+    
+        build.append("#")
+             .append(badge.getId()).append(" ")
+             .append(punchType).append(": ")
+             .append(dayOfTheWeek.name().substring(0, 3))
+             .append(" ")
+             .append(adjustedTimestamp.format(format))
+             .append(" (").append(adjustmenttype).append(")");
+    
+        return build.toString();
+ 
+    }
+    
     
     @Override
     public String toString() {
