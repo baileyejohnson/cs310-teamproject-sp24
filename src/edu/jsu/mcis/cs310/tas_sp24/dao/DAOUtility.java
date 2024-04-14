@@ -84,7 +84,7 @@ public final class DAOUtility {
         ArrayList<HashMap<String, String>> jsonData = new ArrayList<>();
 
         // DateTimeFormatter to format timestamp
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("EEEMM/dd/yyyy HH:mm:ss");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("EEE MM/dd/yyyy HH:mm:ss");
 
         // Loop through each Punch object in the list
         for (Punch punch : dailypunchlist) {
