@@ -26,7 +26,7 @@ public class ShiftDAO {
 
     }
     
-// find method
+    // find method
     public Shift find(int id) {
 
         Shift shift = null;
@@ -50,7 +50,7 @@ public class ShiftDAO {
 
                     while (rs.next()) {
                         
-                        // stroes information in to shift
+                        // stores information in to a hashmap
                         
                         HashMap<String, String> shiftInfo = new HashMap<>();
                         shiftInfo.put("id", rs.getString("id"));
