@@ -9,13 +9,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- *
- * @author utsav
+ * Represents a employee containing the id, first name, middle name, last name, 
+ * active time, badge, department, shift, and employee type.
+ * 
  */
-public class Employee {
-    
+public class Employee {   
     // Classes
-    
     private Integer id;
     private String firstname, middlename, lastname;
     private LocalDateTime active;
@@ -25,6 +24,19 @@ public class Employee {
     private EmployeeType employeeType;
 
 // Constructor for creating an Employee object with specified parameters.
+    /**
+     * Constructs a Employee object with id, first name, middle name, last name, 
+     * badge, department, shift, employeeType.
+     * @param id The ID of the Employee.
+     * @param firstname The first name of the Employee.
+     * @param middlename The middle name of the Employee.
+     * @param lastname The last name of the Employee.
+     * @param active The active time of the Employee.
+     * @param badge The badge of the Employee.
+     * @param department The department of the Employee.
+     * @param shift The shift of the Employee.
+     * @param employeeType The employeeType of the Employee.
+     */
 public Employee(Integer id, String firstname, String middlename, String lastname, LocalDateTime active, Badge badge, 
             Department department, Shift shift, EmployeeType employeeType) 
     {
@@ -42,44 +54,76 @@ public Employee(Integer id, String firstname, String middlename, String lastname
     }
     
     //Getter Methods
+    /**
+     * Gets the ID of the Employee.
+     * @return The ID of the Employee.
+     */
     public Integer getId() {
         return id;
     }
-    
+    /**
+     * Gets the first name of the Employee.
+     * @return The first name of the Employee.
+     */
     public String getFirstname() {
         return firstname;
     }
-    
+    /**
+     * Gets the middle name of the Employee.
+     * @return The middle name of the Employee.
+     */
     public String getMiddlename() {
         return middlename;
     }
-	
+    /**
+     * Gets the last name of the Employee.
+     * @return The last name of the Employee.
+     */
     public String getLastname() {
         return lastname;
     }
-    
+    /**
+     * Gets the active time of the Employee.
+     * @return The active time of the Employee.
+     */
     public LocalDateTime getActive() {
         return active;
     }
-    
+    /**
+     * Gets the badge of the Employee.
+     * @return The badge of Employee.
+     */
     public Badge getBadge() {
         return badge;
     }
-    
+    /**
+     * Gets the department of the Employee.
+     * @return The department of Employee.
+     */
     public Department getDepartment() {
         return department;
     }
-    
+    /**
+     * Gets the shift of the Employee.
+     * @return The shift of the Employee.
+     */
     public Shift getShift() {
         return shift;
     }
-    
+    /**
+     * Gets the employee type of the Employee
+     * @return The employee type of the Employee
+     */
     public EmployeeType getEmployeeType() {
         return employeeType;
     }
     
   
-    //Generates a string representation of the Employee object, including ID, name, badge, type, department, and active status.
+    
+    /**
+     * Generates a string representation of the Employee object, including ID, first name, middle name, last name, badge, type, department, active status.
+     * @return A string representation of the Employee object.
+     */
     @Override
     public String toString() {
         
