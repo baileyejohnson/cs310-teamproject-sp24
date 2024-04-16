@@ -78,4 +78,38 @@ public final class DAOUtility {
 
         return (int) totalWorkedMinutes;
         }
+    
+    public static String getPunchListAsJSON(ArrayList<Punch> dailypunchlist) {
+    // List to hold JSON data for each punch
+        ArrayList<HashMap<String, String>> jsonData = new ArrayList<>();
+
+        // DateTimeFormatter to format timestamp
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("EEE MM/dd/yyyy HH:mm:ss");
+
+        // Loop through each Punch object in the list
+        for (Punch punch : dailypunchlist) {
+            // HashMap to store punch data as key-value pairs
+            HashMap<String, String> punchData = new HashMap<>();
+
+            // Populate punchData with punch details
+            punchData.put("id", String.valueOf(punch.getId()));  
+            punchData.put("badgeid", String.valueOf(punch.getBadge().getId()));  
+            punchData.put("terminalid", String.valueOf(punch.getTerminalid()));  
+            punchData.put("punchtype", String.valueOf(punch.getPunchtype()));  
+            punchData.put("adjustmenttype", String.valueOf(punch.getAdjustmentType()));  
+            punchData.put("originaltimestamp", punch.getOriginaltimestamp().format(format).toUpperCase());  
+            punchData.put("adjustedtimestamp", punch.getAdjustedTimestamp().format(format).toUpperCase());
+
+            // Add punchData to jsonData list
+            jsonData.add(punchData);
+        }
+
+        // Serialize jsonData to JSON string using Jsoner library
+        String json = Jsoner.serialize(jsonData);
+
+        // Return the JSON string
+        return json;
+    }
+
 }
+    
