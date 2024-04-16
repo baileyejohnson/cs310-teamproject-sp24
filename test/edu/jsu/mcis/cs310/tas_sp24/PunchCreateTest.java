@@ -59,5 +59,172 @@ public class PunchCreateTest {
         assertEquals(ots.format(dtf), rts.format(dtf));
 
     }
+    @Test
+    public void testCreatePunch2() {
 
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        PunchDAO punchDAO = daoFactory.getPunchDAO();
+        BadgeDAO badgeDAO = daoFactory.getBadgeDAO();
+
+        /* Create New Punch Object */
+        
+        Punch p1 = new Punch(101, badgeDAO.find("07901755"), EventType.CLOCK_IN);
+
+        /* Create Timestamp Objects */
+        
+        LocalDateTime ots, rts;
+
+        /* Get Punch Properties */
+        
+        String badgeid = p1.getBadge().getId();
+        ots = p1.getOriginaltimestamp();
+        int terminalid = p1.getTerminalid();
+        EventType punchtype = p1.getPunchtype();
+
+        /* Insert Punch Into Database */
+        
+        int punchid = punchDAO.create(p1);
+
+        /* Retrieve New Punch */
+        
+        Punch p2 = punchDAO.find(punchid);
+
+        /* Compare Punches */
+        
+        assertEquals(badgeid, p2.getBadge().getId());
+
+        rts = p2.getOriginaltimestamp();
+
+        assertEquals(terminalid,p2.getTerminalid().intValue());
+        assertEquals(punchtype, p2.getPunchtype());
+        assertEquals(ots.format(dtf), rts.format(dtf));
+
+    }
+@Test
+    public void testCreatePunch3() {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        PunchDAO punchDAO = daoFactory.getPunchDAO();
+        BadgeDAO badgeDAO = daoFactory.getBadgeDAO();
+
+        /* Create New Punch Object */
+        
+        Punch p1 = new Punch(103, badgeDAO.find("0886BF12"), EventType.CLOCK_IN);
+
+        /* Create Timestamp Objects */
+        
+        LocalDateTime ots, rts;
+
+        /* Get Punch Properties */
+        
+        String badgeid = p1.getBadge().getId();
+        ots = p1.getOriginaltimestamp();
+        int terminalid = p1.getTerminalid();
+        EventType punchtype = p1.getPunchtype();
+
+        /* Insert Punch Into Database */
+        
+        int punchid = punchDAO.create(p1);
+
+        /* Retrieve New Punch */
+        
+        Punch p2 = punchDAO.find(punchid);
+
+        /* Compare Punches */
+        
+        assertEquals(badgeid, p2.getBadge().getId());
+
+        rts = p2.getOriginaltimestamp();
+
+        assertEquals(terminalid,p2.getTerminalid().intValue());
+        assertEquals(punchtype, p2.getPunchtype());
+        assertEquals(ots.format(dtf), rts.format(dtf));
+
+    }
+    @Test
+    public void testCreatePunch4() {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        PunchDAO punchDAO = daoFactory.getPunchDAO();
+        BadgeDAO badgeDAO = daoFactory.getBadgeDAO();
+
+        /* Create New Punch Object */
+        
+        Punch p1 = new Punch(104, badgeDAO.find("08D01475"), EventType.CLOCK_IN);
+
+        /* Create Timestamp Objects */
+        
+        LocalDateTime ots, rts;
+
+        /* Get Punch Properties */
+        
+        String badgeid = p1.getBadge().getId();
+        ots = p1.getOriginaltimestamp();
+        int terminalid = p1.getTerminalid();
+        EventType punchtype = p1.getPunchtype();
+
+        /* Insert Punch Into Database */
+        
+        int punchid = punchDAO.create(p1);
+
+        /* Retrieve New Punch */
+        
+        Punch p2 = punchDAO.find(punchid);
+
+        /* Compare Punches */
+        
+        assertEquals(badgeid, p2.getBadge().getId());
+
+        rts = p2.getOriginaltimestamp();
+
+        assertEquals(terminalid,p2.getTerminalid().intValue());
+        assertEquals(punchtype, p2.getPunchtype());
+        assertEquals(ots.format(dtf), rts.format(dtf));
+
+    }
+    @Test
+    public void testCreatePunch5() {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        PunchDAO punchDAO = daoFactory.getPunchDAO();
+        BadgeDAO badgeDAO = daoFactory.getBadgeDAO();
+
+        /* Create New Punch Object */
+        
+        Punch p1 = new Punch(105, badgeDAO.find("08D745A6"), EventType.CLOCK_IN);
+
+        /* Create Timestamp Objects */
+        
+        LocalDateTime ots, rts;
+
+        /* Get Punch Properties */
+        
+        String badgeid = p1.getBadge().getId();
+        ots = p1.getOriginaltimestamp();
+        int terminalid = p1.getTerminalid();
+        EventType punchtype = p1.getPunchtype();
+
+        /* Insert Punch Into Database */
+        
+        int punchid = punchDAO.create(p1);
+
+        /* Retrieve New Punch */
+        
+        Punch p2 = punchDAO.find(punchid);
+
+        /* Compare Punches */
+        
+        assertEquals(badgeid, p2.getBadge().getId());
+
+        rts = p2.getOriginaltimestamp();
+
+        assertEquals(terminalid,p2.getTerminalid().intValue());
+        assertEquals(punchtype, p2.getPunchtype());
+        assertEquals(ots.format(dtf), rts.format(dtf));
+
+    }
 }
