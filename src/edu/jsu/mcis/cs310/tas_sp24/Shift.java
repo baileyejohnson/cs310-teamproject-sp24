@@ -27,7 +27,7 @@ public class Shift {
 
     /**
      * Constructor for create a shift Object.
-     * @param shiftInfo a Map <String, String> for the shift related information.
+     * @param shiftInfo a Map String, String for the shift related information.
      */
     public Shift(HashMap<String, String> shiftInfo) {
         // Retrieve values from the map and convert them to their native types

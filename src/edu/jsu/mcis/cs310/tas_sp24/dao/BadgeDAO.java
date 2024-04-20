@@ -18,6 +18,11 @@ public class BadgeDAO {
     }
 
     //Created a Find method and have the id as a parameter
+    /**
+     * A find method to find badge by ID
+     * @param id the ID of the Badge
+     * @return badge
+     */
     public Badge find(String id) {
 
         Badge badge = null;

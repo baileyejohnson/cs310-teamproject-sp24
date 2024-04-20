@@ -36,7 +36,11 @@ public class PunchDAO {
         this.daoFactory = daoFactory;
 
     }
-
+    /**
+     * A find method to find the Punch by the ID
+     * @param id the ID of the Punch
+     * @return Punch
+     */
     public Punch find(Integer id) {
 
         Punch punch = null;
@@ -109,7 +113,11 @@ public class PunchDAO {
         return punch;
 
     }
-    
+    /**
+     * a create method that creates a new punch
+     * @param punch the punch being created
+     * @return punchID
+     */
     public Integer create(Punch punch) {
 
         Integer punchId = 0;
@@ -189,7 +197,12 @@ public class PunchDAO {
     }
     
 
-
+    /**
+     * Returns a list of punches
+     * @param badge the badge of the Employee
+     * @param date the date of the Punch
+     * @return list
+     */
     public ArrayList<Punch> list(Badge badge, LocalDate date) {
         
         ArrayList<Punch> list = new ArrayList<>();

@@ -26,6 +26,11 @@ public class DepartmentDAO {
 
     }
     // Method to find department by ID
+    /**
+     * A find method to find Department by ID
+     * @param id the ID of the department
+     * @return department
+     */
     public Department find(int id){
         Department department = null;
         //Initialize JDBC objects

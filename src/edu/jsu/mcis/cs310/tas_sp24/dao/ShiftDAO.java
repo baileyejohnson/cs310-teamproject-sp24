@@ -27,6 +27,11 @@ public class ShiftDAO {
     }
     
     // find method
+    /**
+     * A find method for the Shift using the ID
+     * @param id the ID of the shift
+     * @return shift
+     */
     public Shift find(int id) {
 
         Shift shift = null;
@@ -97,7 +102,11 @@ public class ShiftDAO {
         return shift;
 
     }
-
+    /**
+     * A find method for the shift using the Badge ID
+     * @param badge the Badge of the Employee
+     * @return shift
+     */
     public Shift find(Badge badge) {
 
         Shift shift = null;

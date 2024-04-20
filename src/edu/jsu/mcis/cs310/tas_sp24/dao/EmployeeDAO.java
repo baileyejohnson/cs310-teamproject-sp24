@@ -31,6 +31,11 @@ public class EmployeeDAO {
         this.daoFactory = daoFactory;
     }
     // method for finds parts in the database for Employee
+    /**
+     * A find method to find Employee by the ID
+     * @param id the ID of Employee
+     * @return Employee
+     */
     public Employee find(int id){
         
         Employee employee = null;
@@ -103,6 +108,11 @@ public class EmployeeDAO {
          return employee;
 }
      // find method
+    /**
+     * A find method using Badge ID to find Employee
+     * @param badge the badge of the Employee
+     * @return Employee
+     */
     public Employee find(Badge badge){
         
         Employee employee = null;
